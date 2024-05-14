@@ -2647,6 +2647,8 @@ public:
         set_delimeters({ ",", ".", "BUT" });
     }
 
+    eliza() = default;
+
     ~eliza() = default;
 
     // true use built-in error msgs (default); false use NONE messages instead
