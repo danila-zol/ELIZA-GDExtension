@@ -1,6 +1,8 @@
-#pragma once
+#ifndef ELIZA_INCLUDE
+   #include "eliza.cpp"
+   #define ELIZA_INCLUDE
+#endif
 
-#include "eliza.cpp"
 #include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/classes/ref_counted.hpp>
 

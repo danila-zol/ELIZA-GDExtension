@@ -1,5 +1,4 @@
 #include "register_types.h"
-
 #include "gdextension.h"
 
 #include <gdextension_interface.h>
