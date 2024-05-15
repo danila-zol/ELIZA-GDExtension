@@ -6246,261 +6246,6 @@ bool parse_cmdline(
         return true;
 }
 
-
-
-
-
-//#include "unpublished_script_tests.cpp"
-
-//int main(int argc, const char *argv[])
-//{
-//        try {
-//                bool showscript, nobanner, quick, help, port, traceauto = false;
-//                std::string port_name, script_filename;
-//                const std::string command_help{
-//                   "  <blank line>    quit\n"
-//                   "  *               print trace of most recent exchange\n"
-//                   "  **              print the transformation rules used in the most recent reply\n"
-//                   "  *cacm           replay conversation from Weizenbaum's Jan 1966 CACM paper\n"
-//                   "  *key            show all keywords in the current script\n"
-//                   "  *key KEYWORD    show the transformation rule for the given KEYWORD\n"
-//                   "  *traceoff       turn off tracing\n"
-//                   "  *traceon        turn on tracing; enter '*' after any exchange to see trace\n"
-//                   "  *traceauto      turn on tracing; trace shown after every exchange\n"
-//                   "  *tracepre       show input sentence prior to applying transformation\n"
-//                   "                  (for watching the operation of Turing machines)\n"
-//                };
-//
-//                if (!parse_cmdline(argc, argv, showscript, nobanner, quick, help, port, port_name, script_filename) || help) {
-//                        (help ? std::cout : std::cerr)
-//                                << "Usage: ELIZA [options] [<filename>]\n"
-//                                << "\n"
-//                                << "  " << pad(as_option("nobanner")) << "don't display startup banner\n"
-//#ifdef SUPPORT_SERIAL_IO
-//#if defined(_WIN32)
-//                                << "  " << pad(as_option("port COMn")) << "use serial port COMn (e.g. COM2)\n"
-//#else
-//                                << "  " << pad(as_option("port DEV")) << "use serial port DEV (e.g. /dev/cu.PL2303G-USBtoUART10)\n"
-//#endif
-//#endif
-//                                << "  " << pad(as_option("quick")) << "don't print at IBM 2741 speed (14 characters per second)\n"
-//                                << "  " << pad(as_option("showscript")) << "print Weizenbaum's 1966 DOCTOR script\n"
-//                                << "  " << pad("") << "e.g. ELIZA " << as_option("showscript") << " > script.txt\n"
-//                                << "  " << pad("<filename>") << "use named script file instead of built-in DOCTOR script\n"
-//                                << "  " << pad("") << "e.g. ELIZA script.txt\n"
-//                                << "\nIn a conversation with ELIZA, these inputs have special meaning:\n"
-//                                << command_help;
-//                        return help ? EXIT_SUCCESS : EXIT_FAILURE;
-//                }
-//
-//                if (showscript) {
-//                        // just output Weizenbaum's DOCTOR script
-//                        std::cout << elizascript::CACM_1966_01_DOCTOR_script;
-//                        return EXIT_SUCCESS;
-//                }
-//
-//                if (!nobanner) {
-//                        std::cout
-//                                << "-----------------------------------------------------------------\n"
-//                                << "      ELIZA -- A Computer Program for the Study of Natural\n"
-//                                << "         Language Communication Between Man and Machine\n"
-//                                << "DOCTOR script by Joseph Weizenbaum, 1966  (CC0 1.0) Public Domain\n"
-//                                << "ELIZA implementation (v0.96) by Anthony Hay, 2022  (CC0 1.0) P.D.\n"
-//                                << "-----------------------------------------------------------------\n"
-//                                << "Use command line '" << argv[0] << " " << as_option("help") << "' for usage information.\n";
-//                }
-//
-//                RUN_TESTS(); // run all the tests defined with DEF_TEST_FUNC
-//
-//
-//                elizascript::script eliza_script;
-//                if (script_filename.empty()) {
-//                        // use default 'internal' 1966 CACM published script
-//                        if (!nobanner)
-//                                std::cout << "No script filename given; using built-in 1966 DOCTOR script.\n";
-//                        elizascript::read(elizascript::CACM_1966_01_DOCTOR_script, eliza_script);
-//                }
-//                else {
-//                        // use the named script file
-//                        std::ifstream script_file(script_filename);
-//                        if (!script_file.is_open()) {
-//                                std::cerr << argv[0] << ": failed to open script file '"
-//                                        << script_filename << "'\n";
-//                                return EXIT_FAILURE;
-//                        }
-//                        if (!nobanner)
-//                                std::cout << "Using script file '" << script_filename << "'\n\n\n";
-//                        elizascript::read<std::ifstream>(script_file, eliza_script);
-//                }
-//
-//                if (!nobanner)
-//                        std::cout << "Enter a blank line to quit.\n\n\n";
-//
-//
-//                elizalogic::null_tracer notrace;
-//                elizalogic::string_tracer trace;
-//                elizalogic::pre_tracer pretrace;
-//
-//                elizalogic::eliza eliza(eliza_script.rules, eliza_script.mem_rule);
-//                eliza.set_tracer(&trace);
-//
-//#ifdef SUPPORT_SERIAL_IO
-//                serial_io serial_port;
-//                if (port) {
-//                        if (serial_port.open(port_name, "")) {
-//                                std::cout
-//                                        << "Switching to serial port "
-//                                        << port_name << '\n';
-//                        }
-//                        else {
-//                                std::cerr << serial_port.last_error_text() << '\n';
-//                                return EXIT_FAILURE;
-//                        }
-//                }
-//                auto print = [&](const std::string &s) {
-//                        if (port) {
-//                                serial_port.write(s);
-//                                serial_port.write("\r\n");
-//                        }
-//                        else if (quick)
-//                                std::cout << s << std::endl;
-//                        else
-//                                writeln(s);
-//                        };
-//                auto input = [&](std::string &s) {
-//                        if (port)
-//                                s = serial_port.getline();
-//                        else
-//                                std::getline(std::cin, s);
-//                        };
-//#else
-//                auto print = [&](const std::string &s) {
-//                        if (quick)
-//                                std::cout << s << std::endl;
-//                        else
-//                                writeln(s);
-//                        };
-//                auto input = [&](std::string &s) {
-//                        std::getline(std::cin, s);
-//                        };
-//#endif
-//
-//                print(join(eliza_script.hello_message));
-//
-//                for (int cacm_index = -1;;) {
-//                        std::string userinput;
-//
-//                        print("");
-//                        input(userinput);
-//
-//                        if (userinput.empty()) {
-//                                if (cacm_index >= 0) {
-//                                        userinput = elizatest::cacm_1966_conversation[cacm_index++].prompt;
-//                                        print(userinput);
-//                                }
-//                                else
-//                                        break;
-//                        }
-//                        if (userinput[0] == '*') {
-//                                const stringlist cmd_line{ split(to_upper(userinput)) };
-//                                const std::string command{ cmd_line[0] };
-//                                if (command == "*") {
-//                                        std::cout << trace.text();
-//                                }
-//                                else if (command == "**") {
-//                                        std::cout << trace.script();
-//                                }
-//                                else if (command == "*TRACEON") {
-//                                        eliza.set_tracer(&trace);
-//                                        traceauto = false;
-//                                        std::cout << "tracing enabled; enter '*' after any exchange to see trace\n";
-//                                }
-//                                else if (command == "*TRACEAUTO") {
-//                                        eliza.set_tracer(&trace);
-//                                        traceauto = true;
-//                                        std::cout << "tracing enabled\n";
-//                                }
-//                                else if (command == "*TRACEOFF") {
-//                                        eliza.set_tracer(&notrace);
-//                                        trace.clear();
-//                                        traceauto = false;
-//                                        std::cout << "tracing disabled\n";
-//                                }
-//                                else if (command == "*TRACEPRE") {
-//                                        eliza.set_tracer(&pretrace);
-//                                        trace.clear();
-//                                        traceauto = false;
-//                                        std::cout << "tracing PRE enabled\n";
-//                                }
-//                                else if (command == "*CACM") {
-//                                        std::cout <<
-//                                                "Replaying conversation from Weizenbaum's January 1966 CACM paper.\n"
-//                                                "Hit enter to see each exchange (use *traceauto to see the trace).\n";
-//                                        cacm_index = 0;
-//                                }
-//                                else if (command == "*KEY") {
-//                                        if (cmd_line.size() == 2) {
-//                                                // print out the rule associated with the given keyword
-//                                                std::string keyword = cmd_line[1];
-//                                                if (keyword == "NONE")
-//                                                        keyword = elizalogic::special_rule_none;
-//                                                const auto r = eliza_script.rules.find(keyword);
-//                                                if (r != eliza_script.rules.end()) {
-//                                                        const auto &rule = r->second;
-//                                                        std::cout << rule->to_string();
-//                                                }
-//                                                else if (cmd_line[1] == "MEMORY")
-//                                                        std::cout << eliza_script.mem_rule->to_string();
-//                                                else
-//                                                        std::cout << "No '" << cmd_line[1] << "' keyword found in current script\n";
-//                                        }
-//                                        else {
-//                                                // print a list of all keywords
-//                                                for (const auto &[key, rule] : eliza_script.rules) {
-//                                                        if (key == elizalogic::special_rule_none)
-//                                                                continue;
-//                                                        else
-//                                                                std::cout << key << " ";
-//                                                }
-//                                                std::cout << "(plus MEMORY and NONE)\n";
-//                                        }
-//                                }
-//                                else
-//                                        std::cout << "Unknown command. Commands are\n" << command_help;
-//                                continue;
-//                        }
-//
-//                        const std::string response{ eliza.response(userinput) };
-//
-//                        if (!quick) {
-//                                // The doctor takes a moment to reflect before replying.
-//                                // (Weizenbaum developed ELIZA on an IBM 7094 running CTSS.
-//                                // It's quite likely it took a second or two before responding
-//                                // to the user's statements.)
-//                                sleep(1500);
-//                        }
-//
-//                        if (traceauto)
-//                                std::cout << trace.text();
-//
-//                        print(response);
-//
-//                        if (cacm_index >= elizatest::cacm_1966_conversation_size) {
-//                                std::cout << "\n<end of CACM conversation>\n";
-//                                cacm_index = -1;
-//                        }
-//                }
-//        }
-//        catch (const std::exception &e) {
-//                std::cerr << "exception: " << e.what() << std::endl;
-//                return EXIT_FAILURE;
-//        }
-//        catch (...) {
-//                std::cerr << "exception" << std::endl;
-//                return EXIT_FAILURE;
-//        }
-//}
-
 // I've tried to make this respond to user input exactly as the original
 // would have in 1966. I've also tried to communicate how ELIZA works and
 // to make it usable.
@@ -6542,6 +6287,9 @@ public:
         godot::String get_script();
 };
 
+
+// TODO: `join` throws an access violation in the initializer. Figure out why.
+
 ELIZA::ELIZA()
         :script(godot::String(elizascript::CACM_1966_01_DOCTOR_script)),
         eliza_script([]{
@@ -6551,9 +6299,7 @@ ELIZA::ELIZA()
         }()),
          hello_message(godot::String("HOW DO YOU DO.  PLEASE TELL ME YOUR PROBLEM")),
          eliza(eliza_script.rules, eliza_script.mem_rule)
-{
-        UtilityFunctions::print("I am alive");
-}
+{}
 
 
 void ELIZA::_bind_methods()
@@ -6592,7 +6338,6 @@ godot::String ELIZA::get_hello_message()
 
 godot::String ELIZA::answer(godot::String user_input)
 {
-        UtilityFunctions::print("I think");
         std::string s{ user_input.ascii().get_data()};
         return godot::String(eliza.response(s).c_str());
 }
@@ -6621,48 +6366,4 @@ extern "C" {
 
                 return init_obj.init();
         }
-}
-
-class ELIZA2 {
-
-private:
-        std::string hello_message;
-        elizascript::script eliza_script;
-        std::string script;
-        elizalogic::eliza eliza;
-
-protected:
-        static void _bind_methods();
-
-public:
-        ELIZA2();
-        ~ELIZA2() = default;
-
-        std::string answer(std::string user_input);
-};
-
-ELIZA2::ELIZA2()
-        :script(elizascript::CACM_1966_01_DOCTOR_script),
-        eliza_script([] {
-                elizascript::script s;
-                elizascript::read(elizascript::CACM_1966_01_DOCTOR_script, s);
-                return s;
-        }()),
-        hello_message("hello_world"),
-        eliza(eliza_script.rules, eliza_script.mem_rule)
-{
-}
-
-std::string ELIZA2::answer(std::string user_input)
-{
-        return eliza.response(user_input);
-}
-
-int main()
-{
-        char user_input[256];
-        scanf("%s", &user_input);
-        printf("I am thinking\n");
-        ELIZA2 e{};
-        printf(e.answer("I feel unwell").c_str());
 }
