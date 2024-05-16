@@ -33,9 +33,6 @@
     <ClCompile Include="eliza-gdextension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eliza-gdextension2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="serial_io.h">

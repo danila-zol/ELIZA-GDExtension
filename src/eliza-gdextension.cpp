@@ -6288,7 +6288,8 @@ public:
 };
 
 
-// TODO: `join` throws an access violation in the initializer. Figure out why.
+// TODO: `join` throws an access violation exception if put in this 
+//        initializer. Figure out why.
 
 ELIZA::ELIZA()
         :script(godot::String(elizascript::CACM_1966_01_DOCTOR_script)),
