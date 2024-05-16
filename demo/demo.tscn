@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://mq8khyx48qk4"]
+
+[ext_resource type="PackedScene" uid="uid://bxbsmet3jtij3" path="res://eliza_console.tscn" id="1_g3xrs"]
+[ext_resource type="Script" path="res://Screen.gd" id="1_q65km"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_13s24"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tphb"]
+albedo_color = Color(0.374, 0.4037, 0.44, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxutm"]
+viewport_path = NodePath("Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbsjf"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_fxutm")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eayt1"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xbsjf")
+size = Vector2(1, 0.8)
+
+[node name="Demo" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_13s24")
+skeleton = NodePath("")
+
+[node name="Terminal2" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.6319)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terminal2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019989, 0)
+size = Vector3(1.12305, 2.07123, 1.23145)
+material = SubResource("StandardMaterial3D_1tphb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terminal2"]
+transform = Transform3D(1, 0, 0, 0, 0.774492, 0.632584, 0, -0.632584, 0.774492, 0, 0.808794, 0.553282)
+operation = 2
+size = Vector3(1.13062, 1.47876, 0.605713)
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.634609, -0.772833, 0, 0.772833, 0.634609, 0.00393718, 1.70028, -2.31811)
+mesh = SubResource("PlaneMesh_eayt1")
+skeleton = NodePath("../Camera3D")
+script = ExtResource("1_q65km")
+
+[node name="SubViewport" type="SubViewport" parent="Screen"]
+
+[node name="ElizaConsole" parent="Screen/SubViewport" instance=ExtResource("1_g3xrs")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.775341, 0.631542, 0, -0.631542, 0.775341, -0.0123026, 2.19895, -1.70528)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.92214, 0.171138, -0.346943, 0.0915763, 0.77477, 0.625576, 0.375861, -0.608641, 0.698774, -1.34138, 3.6256, 0)

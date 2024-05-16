@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxbsmet3jtij3"]
+
+[ext_resource type="Script" path="res://eliza_input.gd" id="1_r8bsa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_khpx7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rgk4r"]
+
+[sub_resource type="Theme" id="Theme_hy4c4"]
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_khpx7")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_rgk4r")
+
+[sub_resource type="SystemFont" id="SystemFont_60v18"]
+font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa2gk"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_54fjs"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlp6m"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[node name="ElizaConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35, 0.276617, 0.091, 1)
+
+[node name="InputField" type="TextEdit" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = -11.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_hy4c4")
+theme_override_colors/font_color = Color(1, 0.833167, 0.09, 1)
+theme_override_colors/font_selected_color = Color(1, 0.831373, 0.0901961, 1)
+theme_override_colors/font_readonly_color = Color(1, 0.831373, 0.0901961, 1)
+theme_override_fonts/font = SubResource("SystemFont_60v18")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pa2gk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_54fjs")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_jlp6m")
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+caret_type = 1
+caret_blink = true
+caret_draw_when_editable_disabled = true
+caret_multiple = false
+script = ExtResource("1_r8bsa")
+
+[node name="ELIZA" type="ELIZA" parent="Background/InputField"]
+
+[connection signal="caret_changed" from="Background/InputField" to="Background/InputField" method="_on_caret_changed"]
+[connection signal="focus_entered" from="Background/InputField" to="Background/InputField" method="_on_focus_entered"]
+[connection signal="text_changed" from="Background/InputField" to="Background/InputField" method="_on_text_changed"]
