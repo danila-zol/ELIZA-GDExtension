@@ -369,6 +369,7 @@ MigrationBackup/
 
 # Godot 4+ specific ignores
 .godot/
+*.import
 
 # Godot-specific ignores
 .import/
@@ -382,3 +383,6 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Commit binaries for the demo project
+!demo/bin
