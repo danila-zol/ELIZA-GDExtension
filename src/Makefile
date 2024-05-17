@@ -1,6 +1,6 @@
 CXX=g++
 INCLUDE=-I../godot-cpp/include  -I../godot-cpp/gen/include -I../godot-cpp/gdextension
-LIBRARY=-L../godot-cpp/bin -llibgodot-cpp.linux.template_release.x86_64.lib
+LIBRARY=-L../godot-cpp/bin -llibgodot-cpp.linux.template_release.x86_64.a
 DEFINES=-D TYPED_METHOD_BIND
 
 all:
