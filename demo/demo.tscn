@@ -28,15 +28,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_13s24")
 skeleton = NodePath("")
 
-[node name="Terminal2" type="CSGCombiner3D" parent="."]
+[node name="Terminal" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.6319)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Terminal2"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Terminal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019989, 0)
 size = Vector3(1.12305, 2.07123, 1.23145)
 material = SubResource("StandardMaterial3D_1tphb")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Terminal2"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terminal"]
 transform = Transform3D(1, 0, 0, 0, 0.774492, 0.632584, 0, -0.632584, 0.774492, 0, 0.808794, 0.553282)
 operation = 2
 size = Vector3(1.13062, 1.47876, 0.605713)
