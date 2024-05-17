@@ -23,8 +23,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_newline"):
 		# Trim to the actual sentance and remove newline at the end.
 		user_input = text.substr(input_start, -1)
-		if user_input.length() >= 2:
-			user_input[-1] = ""
 
 		eliza_answer = $ELIZA.answer(user_input)
 		await eliza_print('\n' +  eliza_answer)
@@ -45,13 +43,14 @@ func _on_text_changed() -> void:
 
 
 func eliza_print(s: String):
+		editable = false
+
 		# Simple lock against simultaneus calls
 		if currently_printing:
 			return
 		else:
 			currently_printing = true
 
-		editable = false
 		var caret_column = get_caret_column()
 		var t = get_tree()
 
