@@ -6,7 +6,7 @@ Clone godot-cpp bindings into the subdirecotry and build them. Note that you mus
 ```
 git clone -b 4.2 https://github.com/godotengine/godot-cpp
 cd godot-cpp
-scons platform=<platform> target=template_release
+scons platform=<platform> target=template_release bits=64
 ```
 
 ## Windows
