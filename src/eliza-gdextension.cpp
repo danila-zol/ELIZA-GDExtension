@@ -6262,7 +6262,7 @@ bool parse_cmdline(
 
 using namespace godot;
 
-class ELIZA : public Node {
+class ELIZA: public Node {
         GDCLASS(ELIZA, Node)
 
 private:

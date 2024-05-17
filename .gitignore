@@ -367,6 +367,40 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+*.exp
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
 # Godot 4+ specific ignores
 .godot/
 *.import
@@ -385,4 +419,4 @@ data_*/
 mono_crash.*.json
 
 # Commit binaries for the demo project
-!demo/bin
+!demo/bin/eliza.gdextension

@@ -76,6 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>..\godot-cpp\include;..\godot-cpp\gen\include;..\godot-cpp\gdextension;$(IncludePath)</IncludePath>
+    <TargetName>eliza-gdextension.windows.release.x86_64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,7 +134,7 @@
     <PostBuildEvent>
       <Message>
       </Message>
-      <Command>cp .\x64\Release\ELIZA-GDExtension.dll ..\demo\bin\</Command>
+      <Command>cp .\x64\Release\eliza-gdextension.windows.release.x86_64.dll ..\demo\bin\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -155,11 +156,16 @@
     <ClCompile Include="win_serial_io.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="eliza.h" />
     <ClInclude Include="register_types.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="serial_io.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

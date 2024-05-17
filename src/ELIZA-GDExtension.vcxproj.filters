@@ -41,8 +41,11 @@
     <ClInclude Include="register_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eliza.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
   </ItemGroup>
 </Project>

@@ -1,3 +1,9 @@
+CXX=g++
+INCLUDE=-I../godot-cpp/include  -I../godot-cpp/gen/include -I../godot-cpp/gdextension
+LIBRARY=-L../godot-cpp/bin -llibgodot-cpp.windows.template_release.x86_64.lib
+DEFINES=-D TYPED_METHOD_BIND
+
 all:
-	cpp -Wall eliza-gdextension.cpp -o eliza-gdextension 
-	cp eliza-gdextension ../demo/bin
+	$(CXX) eliza-gdextension.cpp -c -Wall $(INCLUDE) $(DEFINES) -std=c++20 -o eliza-gdextension.o 
+	$(CXX) -shared eliza-gdextension.o -Wall $(LIBRARY) -o eliza-gdextension.linux.release.x86_64.so
+	cp eliza-gdextension.linux.release.x86_64.so ../demo/bin

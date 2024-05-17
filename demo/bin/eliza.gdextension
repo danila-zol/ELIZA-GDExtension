@@ -4,5 +4,7 @@ entry_symbol = "eliza_library_init"
 compatibility_minimum = "4.2"
 
 [libraries]
-windows.debug.x86_64 = "res://bin/ELIZA-GDExtension.dll"
-windows.release.x86_64 = "res://bin/ELIZA-GDExtension.dll"
+windows.release.x86_64 = "res://bin/eliza-gdextension.windows.release.x86_64.dll"
+windows.debug.x86_64 = "res://bin/eliza-gdextension.windows.release.x86_64.dll"
+linux.release.x86_64 = "res://bin/eliza-gdextension.linux.release.x86_64.so"
+linux.debug.x86_64 = "res://bin/eliza-gdextension.linux.release.x86_64.so"
