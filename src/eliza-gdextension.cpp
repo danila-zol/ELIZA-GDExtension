@@ -2851,7 +2851,7 @@ namespace elizalogic {
 
                 // e.g. tags[BELIEF] -> (BELIEVE FEEL THINK WISH)
                 // (This is derived from rules_. It's a member so we only need derive it once.)
-                const tagmap tags_;
+                tagmap tags_;
 
                 // script error messages hard-coded in JW's ELIZA, selected by LIMIT (our limit_)
                 static const char *const nomatch_msgs_[4];
@@ -6266,9 +6266,8 @@ class ELIZA : public Node {
         GDCLASS(ELIZA, Node)
 
 private:
-        godot::String hello_message;
         elizascript::script eliza_script;
-        godot::String script;
+        godot::String hello_message;
         elizalogic::eliza eliza;
 
 protected:
@@ -6282,50 +6281,26 @@ public:
 
         void set_hello_message(godot::String s);
         godot::String get_hello_message();
-
-        void set_script(godot::String s);
-        godot::String get_script();
 };
 
-
-// TODO: `join` throws an access violation exception if put in this 
-//        initializer. Figure out why.
-
 ELIZA::ELIZA()
-        :script(godot::String(elizascript::CACM_1966_01_DOCTOR_script)),
-        eliza_script([]{
+        :eliza_script([]{
                 elizascript::script s;
                 elizascript::read(elizascript::CACM_1966_01_DOCTOR_script, s);
                 return s;
         }()),
-         hello_message(godot::String("HOW DO YOU DO.  PLEASE TELL ME YOUR PROBLEM")),
+         hello_message(godot::String(join(eliza_script.hello_message).c_str())),
          eliza(eliza_script.rules, eliza_script.mem_rule)
 {}
 
-
 void ELIZA::_bind_methods()
 {
-        //ClassDB::bind_method(D_METHOD("set_script", "script"), &ELIZA::set_script);
-        //ClassDB::bind_method(D_METHOD("get_script"), &ELIZA::get_script);
-        //ClassDB::add_property("ELIZA", PropertyInfo(Variant::STRING, "script"), "set_script", "get_script");
-
         ClassDB::bind_method(D_METHOD("set_hello_message", "hello_message"), &ELIZA::set_hello_message);
         ClassDB::bind_method(D_METHOD("get_hello_message"), &ELIZA::get_hello_message);
         ClassDB::add_property("ELIZA", PropertyInfo(Variant::STRING, "hello_message"), "set_hello_message", "get_hello_message");
 
         ClassDB::bind_method(D_METHOD("answer", "user_input"), &ELIZA::answer);
 }
-
-//void ELIZA::set_script(godot::String s)
-//{
-//        std::stringstream ss(s.ascii().get_data());
-//        elizascript::read<std::stringstream>(ss, eliza_script);
-//}
-//
-//godot::String ELIZA::get_script()
-//{
-//        return script;
-//}
 
 void ELIZA::set_hello_message(godot::String s)
 {
