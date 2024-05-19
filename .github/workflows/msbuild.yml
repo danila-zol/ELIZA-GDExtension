@@ -38,14 +38,14 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install scons
-      run: py -m pip install scons
+    - name: Fetch scons
+      run: Invoke-WebReequest -Uri "http://prdownloads.sourceforge.net/scons/scons-local-4.7.0.pyz" -OutFile scons-local-4.7.0.pyz
 
     - name: Fetch godot-cpp repo
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
 
     - name: Compile godot-cpp
-      run: py -m scons -C godot-cpp target=template_release
+      run: py scons-local-4.7.0.pyz -C godot-cpp target=template_release
 
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
