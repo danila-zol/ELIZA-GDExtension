@@ -39,7 +39,7 @@ jobs:
         python-version: '3.11'
 
     - name: Fetch scons
-      run: Invoke-WebRequest -Uri "http://prdownloads.sourceforge.net/scons/scons-local-4.7.0.pyz" -OutFile scons-local-4.7.0.pyz
+      run: Invoke-WebRequest -Uri "https://downloads.sourceforge.net/project/scons/scons-local/4.7.0/scons-local-4.7.0.pyz?ts=gAAAAABmSXJVQ8lBO1XDD3OFtfTKSq4ZaTiqzsF5wVa4hEqQTfct0Gk9wI8C2UBsOL3woHAaOyinypTrCeP3y2vFDMTt90M9MQ%3D%3D&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fscons%2Ffiles%2Fscons-local%2F4.7.0%2Fscons-local-4.7.0.pyz%2Fdownload%3Fuse_mirror%3Dmaster" -OutFile scons-local-4.7.0.pyz
 
     - name: Fetch godot-cpp repo
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
