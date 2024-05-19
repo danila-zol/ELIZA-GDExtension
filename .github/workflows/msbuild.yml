@@ -33,6 +33,20 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5.0.0
+      with:
+        python-version: '3.11'
+
+    - name: Install scons
+      run: py -m pip install scons
+
+    - name: Fetch godot-cpp repo
+      run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
+
+    - name: Compile godot-cpp
+      run: scons -C godot-cpp target=template_release
+
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
