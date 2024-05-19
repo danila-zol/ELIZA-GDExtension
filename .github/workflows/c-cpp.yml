@@ -22,6 +22,11 @@ jobs:
     - name: Install scons
       run: sudo apt install scons
 
+    - name: Set up clang
+      run: |
+        sudo apt install clang
+        CXX=clang++
+
     - name: Fetch godot-cpp repo
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
 
