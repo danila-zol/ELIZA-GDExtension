@@ -25,7 +25,7 @@ jobs:
     - name: Set up clang
       run: |
         sudo apt install clang
-        CXX=clang++
+        export CXX=clang++
 
     - name: Fetch godot-cpp repo
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
