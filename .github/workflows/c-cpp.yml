@@ -25,13 +25,12 @@ jobs:
     - name: Set up clang
       run: |
         sudo apt install clang
-        export CXX=clang++
 
     - name: Fetch godot-cpp repo
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
 
     - name: Compile godot-cpp
-      run: scons -C godot-cpp target=template_release
+      run: scons -C godot-cpp CXX=clang++ target=template_release
 
     - name: Compile our extension
-      run: make -C src all
+      run: make -C src CXX=clang++ all
