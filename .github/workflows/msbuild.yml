@@ -45,7 +45,7 @@ jobs:
       run: git clone -b 4.2 https://github.com/godotengine/godot-cpp
 
     - name: Compile godot-cpp
-      run: scons -C godot-cpp target=template_release
+      run: py -m scons -C godot-cpp target=template_release
 
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
